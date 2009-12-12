@@ -1,27 +1,37 @@
 h1. *EPBT(SAP Enterprise Portal Behavior Testing)* - SAP Enterprise Portal Behavior Testing
 
-p. %{color:#058}_Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_%
+p. _Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_
 
 h2. Overview
 
 h3. Features
 
-* Behavior testing environment aimed to SAP EP(Enterprise Portal)
+*EPBT(SAP Enterprise Portal Behavior Testing)* aims to regroup the following features:
+
+* Behavior testing environment aimed to SAP EP(Enterprise Portal) (Enterprise Portal)
 * One-click non regression testing of SAP web applications
-* Support for: Web DynPro/Java (atm)
+* Support for: Java Web DynPro (7.0, CE7.1), BSP, JSP, Enterprise Portal Applications
 * Can be used to support "BDD(Behavior Driven Development)":http://en.wikipedia.org/wiki/Behavior_Driven_Development (Behavior Driven Development)
 
 h3. Status
 
-EPBT development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha.
+EPBT(SAP Enterprise Portal Behavior Testing) development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha.
+
+h3. Installation
+
+See the github "Installation":http://github.com/arnaud/EPBT/wikis/installation wiki page.
 
 h2. Running tests
 
-bq. autorun-report.bat
+bq. run-report.bat
+
+or the command line version:
+
+bq. rake runreport
 
 h2. License
 
-* EPBT is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
+* EPBT(SAP Enterprise Portal Behavior Testing) is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
 * SAP EP(Enterprise Portal) is copyrighted "SAP AG":http://www.sap.com/. All Rights Reserved.
 
 h2. Contributors
