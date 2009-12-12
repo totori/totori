@@ -1,0 +1,22 @@
+﻿h1. README
+
+*EPBT(SAP Enterprise Portal Behavior Testing)* - SAP[1] Enterprise Portal Behavior Testing
+
+p. %{color:#058}_Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_%
+
+h2. Overview
+
+* Behavior testing environment aimed to SAP EP(Enterprise Portal)
+* One-click non regression testing of SAP web applications
+* Support for: Web DynPro/Java (atm)
+* Can be used to support "BDD(Behavior Driven Development)":http://en.wikipedia.org/wiki/Behavior_Driven_Development (Behavior Driven Development)
+
+h2. Running tests
+
+bq. run_all_features.bat
+
+h2. Contributors
+
+ * "arnaud":http://github.com/arnaud (author)
+
+fn1. Not affiliated nor related to "SAP AG":http://www.sap.com/ ^&copy;^.
