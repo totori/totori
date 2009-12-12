@@ -1,0 +1,1 @@
+..\ext\nircmd\nircmdc regsvr reg ..\ext\watir\AutoItX3.dll
