@@ -2,7 +2,7 @@
 # http://github.com/arnaud/EPBT  -  MIT License
 
 #
-# Configuration of a specific portal
+# Configuration of the portal
 #
 class MyConfig
   # Root URL
@@ -12,12 +12,13 @@ class MyConfig
   
   # Valid credential
   def valid_credential
-    {:name => 'valid_user', :password => 'valid_password'}
+    {:name => 'user_01', :password => 'abcd1234'}
   end
   
 private
   # Root part (http://<host>:<port>/)
   def _root
+    #'http://192.168.0.13:50000/'
     'http://srm.tatamotors.com/'
   end
 end

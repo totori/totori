@@ -1,4 +1,12 @@
 ﻿# language: en
+
+# EPBT - SAP Enterprise Portal Behavior Testing
+# http://github.com/arnaud/EPBT  -  MIT License
+
+#
+# Example: Portal connection feature (english)
+#
+
 @example @en
 Feature: Portal logging in and logging off
   In order to check access the portal
@@ -26,10 +34,11 @@ Feature: Portal logging in and logging off
     Then I should be logged in
     
     Examples:
-      | user          | password |
+      | user           | password |
+      | user_01        | abcd1234 |
   
   @example
-  Scenario: Déconnexion
+  Scenario: Logging off
     Given I am logged in
-	When I log off
-	Then I should be logged off
+    When I log off
+    Then I should be logged off

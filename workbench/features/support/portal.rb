@@ -18,7 +18,12 @@ class Portal
   
   # Test wether we're logged in or not
   def logged_in?
-    @browser.contains_text("Se déconnecter") #TODO should be enhanced
+    #begin
+    #  assert @browser.cell(:id, 'welcome_message').text.contains?("Welcome")
+    #rescue
+    #  false
+    #end
+    @browser.contains_text("Log Off") #TODO should be enhanced
   end
   
   # Connect to the portal using credentials
@@ -31,10 +36,10 @@ class Portal
   # Log off the portal
   def logoff
     begin
-	  @browser.form(:name, 'logoffForm').submit
-	rescue
-	  raise "Not logged yet!"
-	end
+      @browser.form(:name, 'logoffForm').submit
+    rescue
+      raise "Can't log off: not logged in yet!"
+    end
   end
   
   # Test if the "message" error is displayed
@@ -59,7 +64,7 @@ private
   # * success
   def reports_message?(severity, message)
     # TODO check it works properly
-    @browser.cell(:xpath, "//div[@class='#{severity}']").text == message
+    @browser.cell(:xpath, "//div[@class='#{severity}']").text.should == message
     #divs = @browser.divs
     #divs.each do |d|
     #  if d.text.match( /#{message}/i )

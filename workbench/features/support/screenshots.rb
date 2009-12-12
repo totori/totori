@@ -17,11 +17,9 @@ module Screenshots
       `screencapture -t png reports/screens/#{id}.png`
     end
   elsif Cucumber::WINDOWS
-	def take_screenshot(id)
-	  `mkdir reports 2> nul`
-	  `mkdir reports\\screens 2> nul`
-	  `..\\ext\\nircmd\\nircmd savescreenshotwin reports\\screens\\#{id}.png`
-	end
+    def take_screenshot(id)
+      `..\\ext\\nircmd\\nircmd savescreenshotwin reports\\screens\\#{id}.png`
+    end
   else
     # Other platforms...
     def take_screenshot(id)

@@ -1,1 +1,0 @@
-..\ext\nircmd\nircmdc execmd cucumber --tags ~@example --format html --out reports/report_~$currdate.yyyyMMdd$-~$currtime.HHmmss$.html

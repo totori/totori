@@ -1,8 +1,14 @@
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
+#
+# Environement
+#
+
+# for windows console
 require 'cucumber/formatter/unicode'
-#require 'spec/expectations'
+# rspec
+require 'spec/expectations'
 
 ## CONFIG
 

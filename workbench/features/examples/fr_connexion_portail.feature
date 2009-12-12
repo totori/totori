@@ -1,4 +1,12 @@
-﻿# language: fr
+# language: fr
+
+# EPBT - SAP Enterprise Portal Behavior Testing
+# http://github.com/arnaud/EPBT  -  MIT License
+
+#
+# Example: Portal connection feature (french)
+#
+
 @example @fr
 Fonctionnalité: Connexion et déconnexion du portail
   Afin de vérifier l'accès au portail
@@ -27,9 +35,10 @@ Fonctionnalité: Connexion et déconnexion du portail
     
     Exemples:
       | utilisateur    | mot de passe |
+	    | user_01        | abcd1234     |
   
   @example
   Scénario: Déconnexion
     Soit je suis identifié
-	Lorsque je me déconnecte
-	Alors je devrais être déconnecté
+    Lorsque je me déconnecte
+    Alors je devrais être déconnecté

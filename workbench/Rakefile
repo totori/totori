@@ -1,0 +1,32 @@
+# EPBT - SAP Enterprise Portal Behavior Testing
+# http://github.com/arnaud/EPBT  -  MIT License
+
+#
+# Rake tasks
+#
+
+require 'rubygems'
+require 'cucumber/rake/task'
+
+# create report directories
+FileUtils.mkdir_p 'reports/screens'
+
+# generate the report name
+def report_filename
+  "reports/report_#{Time.now.strftime("%Y%m%d-%H%M%S")}.html"
+end
+
+# run my own features, output in the console
+Cucumber::Rake::Task.new(:run) do |t|
+  t.cucumber_opts = "--tags ~@example --format pretty"
+end
+
+# run my own features, output in an html report file
+Cucumber::Rake::Task.new(:runreport) do |t|
+  t.cucumber_opts = "--tags ~@example --format html --out #{report_filename}"
+end
+
+# run the example features
+Cucumber::Rake::Task.new(:example) do |t|
+  t.cucumber_opts = "--tags @example --format html --out #{report_filename}"
+end
