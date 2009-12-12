@@ -1,4 +1,4 @@
-﻿h1. *EPBT(SAP Enterprise Portal Behavior Testing)* - SAP Enterprise Portal Behavior Testing
+h1. *EPBT(SAP Enterprise Portal Behavior Testing)* - SAP Enterprise Portal Behavior Testing
 
 p. %{color:#058}_Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_%
 
