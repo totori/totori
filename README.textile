@@ -1,6 +1,6 @@
 ﻿h1. README
 
-*EPBT(SAP Enterprise Portal Behavior Testing)* - SAP[1] Enterprise Portal Behavior Testing
+*EPBT(SAP Enterprise Portal Behavior Testing)* - SAP Enterprise Portal Behavior Testing
 
 p. %{color:#058}_Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_%
 
@@ -15,8 +15,11 @@ h2. Running tests
 
 bq. run_all_features.bat
 
+h2. License
+
+* EPBT is licensed under the original MIT license.
+* SAP EP(Enterprise Portal) is copyrighted SAP AG. All Rights Reserved.
+
 h2. Contributors
 
- * "arnaud":http://github.com/arnaud (author)
-
-fn1. Not affiliated nor related to "SAP AG":http://www.sap.com/ ^&copy;^.
+* "arnaud":http://github.com/arnaud (author)
