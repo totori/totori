@@ -19,10 +19,10 @@ EPBT(SAP Enterprise Portal Behavior Testing) development status is currently "Pr
 
 h3. Installation
 
-| If running Windows, you can install EPBT with "*+EPBT one click installer+*":http://cloud.github.com/downloads/arnaud/EPBT/EPBT-setup-0.0.1.exe. | "*+Download EPBT+*":http://cloud.github.com/downloads/arnaud/EPBT/EPBT-setup-0.0.1.exe !http://github.com/arnaud/assets/raw/master/img/download.png!:http://cloud.github.com/downloads/arnaud/EPBT/EPBT-setup-0.0.1.exe | |
-| It's an offline, self-contained, fully-featured installation executable. | |
-| | |
-| For more information about the installation, see the github "Installation":http://github.com/arnaud/EPBT/wikis/installation wiki page. | |
+If running Windows, you can install EPBT with "*+EPBT one click installer+*":http://cloud.github.com/downloads/arnaud/EPBT/EPBT-setup-0.0.1.exe.
+It's an offline, self-contained, fully-featured installation executable.
+
+For more information about the installation, see the github "Installation":http://github.com/arnaud/EPBT/wikis/installation wiki page.
 
 h2. Running tests
 
