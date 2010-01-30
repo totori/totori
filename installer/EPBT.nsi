@@ -52,6 +52,7 @@ Section ""
   File thirdparties\gems\rubyforge-2.0.3.gem
   File thirdparties\gems\s4t-utils-1.0.4.gem
   File thirdparties\gems\term-ansicolor-1.0.4.gem
+  File thirdparties\gems\syntax-1.0.0.gem
   File thirdparties\gems\treetop-1.4.2.gem
   File thirdparties\gems\user-choices-1.1.6.gem
   File thirdparties\gems\watir-1.6.5.gem
