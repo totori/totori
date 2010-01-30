@@ -5,11 +5,11 @@
 # Screenshots module
 #
 module Screenshots
-  def add_screenshot
+  def add_screenshot(description)
     id = "screenshot_#{Time.new.to_i}"
-	@browser.bring_to_front
+	  @browser.bring_to_front
     take_screenshot(id)
-    embed("screens/#{id}.png", "image/png")
+    embed("screens/#{id}.png|#{description}", "image/png")
   end
 
   if Cucumber::OS_X
@@ -29,11 +29,15 @@ module Screenshots
 end
 
 #After(@screenshot) do
-#  add_screenshot
+#  add_screenshot("")
 #end
 
 After do |scenario|
-  add_screenshot if scenario.failed?
+  add_screenshot(scenario.name) if scenario.failed?
 end
+
+#After do |step|
+#  add_screenshot("#{step.name} - line ##{step.line}") if step.failed?
+#end
 
 World(Screenshots)

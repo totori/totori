@@ -40,11 +40,13 @@ Section ""
   File thirdparties\gems\activesupport-2.3.5.gem
   File thirdparties\gems\builder-2.1.2.gem
   File thirdparties\gems\commonwatir-1.6.5.gem
+  File thirdparties\gems\configuration-1.1.0.gem
   File thirdparties\gems\cucumber-0.4.4.gem
   File thirdparties\gems\diff-lcs-1.1.2.gem
   File thirdparties\gems\firewatir-1.6.5.gem
   File thirdparties\gems\hoe-2.3.3.gem
   File thirdparties\gems\json_pure-1.2.0.gem
+  File thirdparties\gems\launchy-0.3.5.gem
   File thirdparties\gems\nokogiri-1.4.0-x86-mingw32.gem
   File thirdparties\gems\polyglot-0.2.9.gem
   File thirdparties\gems\rake-0.8.7.gem

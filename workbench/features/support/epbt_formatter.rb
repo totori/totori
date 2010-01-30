@@ -45,7 +45,7 @@ class EPBTFormatter
     end
     @builder << '<body>'
     @builder << "<!-- Step count #{@step_count}-->"
-    @builder << '<div class="cucumber"'
+    @builder << '<div class="cucumber">'
     @builder.div(:id => 'cucumber-header') do
       @builder.div(:id => 'label') do
         @builder.h1('EPBT Report')
@@ -284,29 +284,40 @@ class EPBTFormatter
     @builder.pre(announcement, :class => 'announcement')
   end
 
+  def embed(file_and_description, mime_type)
+    case(mime_type)
+    when /^image\/(png|gif|jpg)/
+      file = file_and_description.split("|")[0]
+      description = file_and_description.split("|")[1]
+      embed_screenshot(file, description)
+    end
+  end
+
   protected
 
     def build_exception_detail(exception)
-      backtrace = Array.new
-      @builder.div(:class => 'message') do
-        message = exception.message
-        if message.include?('Exception caught')
-          matches = message.match(/Showing <i>(.+)<\/i>(?:.+)#(\d+)/)
-          backtrace += ["#{RAILS_ROOT}/#{matches[1]}:#{matches[2]}"]
-          message = message.match(/<code>([^(\/)]+)<\//m)[1]
+      @builder.div(:class => 'exception_detail') do
+        backtrace = Array.new
+        @builder.div(:class => 'message') do
+          message = exception.message
+          if message.include?('Exception caught')
+            matches = message.match(/Showing <i>(.+)<\/i>(?:.+)#(\d+)/)
+            backtrace += ["#{RAILS_ROOT}/#{matches[1]}:#{matches[2]}"]
+            message = message.match(/<code>([^(\/)]+)<\//m)[1]
+          end
+          @builder << "<pre>#{message}</pre>"
         end
-        @builder << "<pre>#{message}</pre>"
-      end
-      @builder.div(:class => 'backtrace') do
-        @builder.pre do
-          # backtrace += (exception.backtrace.size == 1 || exception.backtrace[0].include?('(eval):')) ? ["#{RAILS_ROOT}/#{@step_match.file_colon_line}"] + exception.backtrace : exception.backtrace
-          backtrace = exception.backtrace
-          backtrace.delete_if { |x| x =~ /\/gems\/(cucumber|rspec)/ }
-          @builder << backtrace_line(backtrace.join("\n"))
+        @builder.div(:class => 'backtrace') do
+          @builder.pre do
+            # backtrace += (exception.backtrace.size == 1 || exception.backtrace[0].include?('(eval):')) ? ["#{RAILS_ROOT}/#{@step_match.file_colon_line}"] + exception.backtrace : exception.backtrace
+            backtrace = exception.backtrace
+            backtrace.delete_if { |x| x =~ /\/gems\/(cucumber|rspec)/ }
+            @builder << backtrace_line(backtrace.join("\n"))
+          end
         end
+        extra = extra_failure_content(backtrace)
+        @builder << extra unless extra == ""
       end
-      extra = extra_failure_content(backtrace)
-      @builder << extra unless extra == ""
     end
 
     def set_scenario_color(status)
@@ -383,13 +394,17 @@ class EPBTFormatter
 
     def inline_css
       #@builder.style(:type => 'text/css') do
-      #  @builder << File.read(File.dirname(__FILE__) + '/epbt.css')
+      #  @builder << File.read(File.dirname(__FILE__) + '/cucumber-textmate.css')
       #end
-      #@builder << "<link href=\"css/epbt.css\" rel=\"stylesheet\" type=\"text/css\">"
-      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'css/epbt.css')
+      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/epbt.css')
+      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/jquery.lightbox-0.5.css', :media => 'screen')
+      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/thumbs.css', :media => 'screen')
     end
 
     def inline_js
+      @builder.script(:type => 'text/javascript', :src => 'assets/jquery-1.4.1.min.js')
+      @builder.script(:type => 'text/javascript', :src => 'assets/jquery.thumbs.js')
+      @builder.script(:type => 'text/javascript', :src => 'assets/jquery.lightbox-0.5.min.js')
       @builder.script(:type => 'text/javascript') do
         @builder << inline_js_content
       end
@@ -398,17 +413,40 @@ class EPBTFormatter
     def inline_js_content
       <<-EOF
   function moveProgressBar(percentDone) {
-  document.getElementById("cucumber-header").style.width = percentDone +"%";
+    document.getElementById("cucumber-header").style.width = percentDone +"%";
+    //$("#cucumber-header").css("width", percentDone + "%");
   }
   function makeRed(element_id) {
-  document.getElementById(element_id).style.background = '#C40D0D';
-  document.getElementById(element_id).style.color = '#FFFFFF';
+    document.getElementById(element_id).style.background = '#C40D0D';
+    document.getElementById(element_id).style.color = '#FFFFFF';
+    //$("#"+element_id)
+    //  .css("background", "#C40D0D")
+    //  .css("color", "#FFFFFF");
   }
-
   function makeYellow(element_id) {
-  document.getElementById(element_id).style.background = '#FAF834';
-  document.getElementById(element_id).style.color = '#000000';
+    document.getElementById(element_id).style.background = '#FAF834';
+    document.getElementById(element_id).style.color = '#000000';
+    //$("#"+element_id)
+    //  .css("background", "#FAF834")
+    //  .css("color", "#000000");
   }
+  $(function() {
+    $('a.screenshot').thumbs();
+    $('a.screenshot img').thumbsImg();
+    $('a.screenshot').lightBox({
+      fixedNavigation: true,
+      overlayOpacity: 0.6,
+      txtImage: 'Screenshot',
+      txtOf: 'of'
+    });
+    $('.exception_detail').hide();
+    $('.exception_detail').parent().mouseover(function() {
+      $('.exception_detail', this).show();
+    });
+    $('.exception_detail').parent().mouseout(function() {
+      $('.exception_detail', this).hide();
+    });
+  });
   EOF
     end
 
@@ -436,8 +474,8 @@ class EPBTFormatter
     end
 
     def print_stats(features)
-      @builder <<  "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
-      @builder <<  "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
+      @builder <<  "<script type=\"text/javascript\">$('#duration').html(\"Finished in <strong>#{format_duration(features.duration)}</strong>\");</script>"
+      @builder <<  "<script type=\"text/javascript\">$('#totals').html(\"#{print_stat_string(features)}\");</script>"
     end
 
     def print_stat_string(features)
@@ -463,6 +501,13 @@ class EPBTFormatter
 
     def create_builder(io)
       Cucumber::Formatter::OrderedXmlMarkup.new(:target => io, :indent => 0)
+    end
+
+    def embed_screenshot(file, description)
+      id = file.hash
+      @builder.pre(:class => 'embed') do |pre|
+        pre << %{<a class="screenshot" href="#{file}" title="#{description}"><img id="#{id}" src="#{file}" /></a>}
+      end
     end
 end
 
@@ -509,14 +554,6 @@ class SnippetExtractor #:nodoc:
       new_lines << new_line
     end
     new_lines.join("\n")
-  end
-
-  def embed_image(file)
-    id = file.hash
-    builder.pre(:class => 'embed') do |pre|
-      pre << %{<a href="#" onclick="img=document.getElementById('#{id}'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');">Screenshot</a>
-      <img id="#{id}" style="display: none" src="#{file}" />}
-    end
   end
 
 end
