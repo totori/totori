@@ -11,7 +11,7 @@
 Name "Enteprise Portal Behavior Testing"
 
 ; The file to write
-OutFile "EPBT-setup-0.0.1.exe"
+OutFile "EPBT-setup-0.0.2.exe"
 
 ; The default installation directory
 InstallDir $PROGRAMFILES\EPBT
@@ -39,11 +39,13 @@ Section ""
   File thirdparties\devkit-3.4.5r3-20091110.7z
   File thirdparties\gems\activesupport-2.3.5.gem
   File thirdparties\gems\builder-2.1.2.gem
+  File thirdparties\gems\chromewatir-1.5.1.gem
   File thirdparties\gems\commonwatir-1.6.5.gem
   File thirdparties\gems\configuration-1.1.0.gem
   File thirdparties\gems\cucumber-0.4.4.gem
   File thirdparties\gems\diff-lcs-1.1.2.gem
   File thirdparties\gems\firewatir-1.6.5.gem
+  File thirdparties\gems\gemcutter-0.3.0.gem
   File thirdparties\gems\hoe-2.3.3.gem
   File thirdparties\gems\json_pure-1.2.0.gem
   File thirdparties\gems\launchy-0.3.5.gem
@@ -52,6 +54,7 @@ Section ""
   File thirdparties\gems\rake-0.8.7.gem
   File thirdparties\gems\rspec-1.2.9.gem
   File thirdparties\gems\rubyforge-2.0.3.gem
+  File thirdparties\gems\safariwatir-0.3.7.gem
   File thirdparties\gems\s4t-utils-1.0.4.gem
   File thirdparties\gems\term-ansicolor-1.0.4.gem
   File thirdparties\gems\syntax-1.0.0.gem
@@ -64,7 +67,7 @@ Section ""
   File thirdparties\gems\windows-api-0.4.0.gem
   File thirdparties\gems\windows-pr-1.0.8.gem
   File thirdparties\gems\xml-simple-1.0.12.gem
-  File EPBT-src-0.0.1.zip
+  File EPBT-src-0.0.2.zip
   
   ; Set output path to the installation directory.
   ;SetOutPath $INSTDIR
@@ -74,7 +77,7 @@ SectionEnd
 Section "EPBT Sources"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Installing EPBT..."
-  ZipDLL::extractall "$TEMP\EPBT-src-0.0.1.zip" $INSTDIR
+  ZipDLL::extractall "$TEMP\EPBT-src-0.0.2.zip" $INSTDIR
 	DetailPrint "success"
 SectionEnd
 

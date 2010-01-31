@@ -8,7 +8,7 @@
 require 'rubygems'
 require 'cucumber/rake/task'
 require 'ftools'
-require 'launchy'
+#require 'launchy'
 
 # create report directories
 FileUtils.mkdir_p 'reports/screens'
@@ -26,13 +26,13 @@ end
 # run my own features, output in an html report file
 Cucumber::Rake::Task.new(:runreport) do |t|
   t.cucumber_opts = "--tags ~@example --format EPBTFormatter --out #{report_filename}"
-  File.new(report_filename, "w")
-  Launchy.open("#{Dir.pwd}/#{report_filename}")
+  #File.new(report_filename, "w")
+  #Launchy.open("#{Dir.pwd}/#{report_filename}")
 end
 
 # run the example features
 Cucumber::Rake::Task.new(:example) do |t|
   t.cucumber_opts = "--tags @example --format EPBTFormatter --out #{report_filename}"
-  File.new(report_filename, "w")
-  Launchy.open("#{Dir.pwd}/#{report_filename}")
+  #File.new(report_filename, "w")
+  #Launchy.open("#{Dir.pwd}/#{report_filename}")
 end

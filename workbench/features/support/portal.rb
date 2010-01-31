@@ -42,6 +42,40 @@ class Portal
     end
   end
   
+  # Access the page title bar
+  def page_title_bar
+    e = @browser.span(:xpath, "//table[@id='pageTitleBar']//span[@id='BreadCrumbDiv']")
+    e
+  end
+  
+  # Access the current page
+  def current_page
+    e = @browser.frame(:name, /Desktop Innerpage\s*/)
+    e
+  end
+  
+  # Access the content area
+  def content_area
+    e = current_page.frame(:name, /isolatedWorkArea/)
+    e
+  end
+  
+  # Access the current application
+  def app
+    e = content_area.div(:id, "_SSR_CONTENT_CONTAINER")
+    e
+  end
+  
+  # Access the main tab by its name
+  def tln_main_tab(name)
+    @browser.link(:xpath, "//div[@id='TLNDiv']/div[@id='Level1DIV']//a[text()='"+name+"']")
+  end
+  
+  # Access the sub-tab by its name
+  def tln_sub_tab(name)
+    @browser.link(:xpath, "//div[@id='TLNDiv']/div[@id='Level2DIV']//a[text()='"+name+"']")
+  end
+  
   # Test if the "message" error is displayed
   def reports_error?(message)
     reports_message?('urMsgBarErr', message)
@@ -54,7 +88,7 @@ class Portal
   
   # Test if the "message" success is displayed
   def reports_success?(message)
-    reports_message?('urMsgBarSucc', message) #TODO check
+    reports_message?('urMsgBarStd', message) #TODO check
   end
 
 private
@@ -63,16 +97,6 @@ private
   # * warning
   # * success
   def reports_message?(severity, message)
-    # TODO check it works properly
-    @browser.cell(:xpath, "//div[@class='#{severity}']").text.should == message
-    #divs = @browser.divs
-    #divs.each do |d|
-    #  if d.text.match( /#{message}/i )
-    #    if d.class_name.match(/#{severity}/i)
-    #      return true
-    #    end
-    #  end
-    #end
-    #false
+    app.div(:class, severity).text.should == message
   end
 end
