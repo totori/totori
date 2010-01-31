@@ -67,6 +67,12 @@ Section ""
   File thirdparties\gems\windows-api-0.4.0.gem
   File thirdparties\gems\windows-pr-1.0.8.gem
   File thirdparties\gems\xml-simple-1.0.12.gem
+  File thirdparties\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe
+  File thirdparties\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe
+  File thirdparties\firefox\jssh-3.5.x-WINNT.xpi
+  File thirdparties\firefox\jssh-3.6-WINNT.xpi
+  File thirdparties\firefox\jssh-20080708-WINNT.xpi
+  File thirdparties\firefox\jssh-WINNT-2.x.xpi
   File EPBT-src-0.0.2.zip
   
   ; Set output path to the installation directory.
@@ -90,14 +96,6 @@ Section "Ruby installer"
 	DetailPrint "success"
 SectionEnd
 
-Section "Devkit"
-  SetOutPath "${RUBY_DIR}"
-	DetailPrint "--------------------------------------------------------------------------------"
-	DetailPrint "Installing Windows Development kit..."
-  Nsis7z::ExtractWithDetails "$TEMP\devkit-3.4.5r3-20091110.7z" "Installing Windows Development kit %s..."
-	DetailPrint "success"
-SectionEnd
-
 Section "Environment variable"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Setting up the PATH environment variable..."
@@ -106,6 +104,14 @@ Section "Environment variable"
   Push "HKCU"
   Push "${RUBY_DIR}\bin"
   Call EnvVarUpdate
+	DetailPrint "success"
+SectionEnd
+
+Section "Devkit"
+  SetOutPath "${RUBY_DIR}"
+	DetailPrint "--------------------------------------------------------------------------------"
+	DetailPrint "Installing Windows Development kit..."
+  Nsis7z::ExtractWithDetails "$TEMP\devkit-3.4.5r3-20091110.7z" "Installing Windows Development kit %s..."
 	DetailPrint "success"
 SectionEnd
 
@@ -176,6 +182,34 @@ SectionEnd
 Function un.onUninstSuccess
   MessageBox MB_OK "You have successfully uninstalled ${PRODUCT}."
 FunctionEnd
+
+
+;Function GetFirefoxVersion
+;  Push $R0
+;  ClearErrors
+;  ReadRegStr $R0 HKCU "Software\Mozilla\Mozilla Firefox" "CurrentVersion"
+; 
+;    ReadRegStr $R0 HKLM "Software\Microsoft\Internet Explorer" "IVer"
+;    IfErrors lbl_error
+; 
+;      StrCpy $R0 $R0 3
+;        StrCmp $R0 '100' lbl_ie1
+;        StrCmp $R0 '101' lbl_ie2
+;        StrCmp $R0 '102' lbl_ie2
+;        StrCpy $R0 '3' ; default to ie3 if not 100, 101, or 102.
+;        Goto lbl_done
+;          lbl_ie1:
+;            StrCpy $R0 '1'
+;          Goto lbl_done
+;          lbl_ie2:
+;            StrCpy $R0 '2'
+;          Goto lbl_done
+;       lbl_error:
+;         StrCpy $R0 ''
+;   lbl_done:
+;   Exch $R0
+;FunctionEnd
+
 
 /**
  *  EnvVarUpdate.nsh

@@ -15,7 +15,12 @@ require 'yaml'
 
 ## CONFIG
 
-config = YAML.load_file("config/myconfig.yml") || {}
+begin
+  config = YAML.load_file("config/myconfig.yml")
+rescue
+  puts "\e[31mERROR! You may want to set the config file in \"workbench/config/myconfig.yml\"\e[0m"
+  exit
+end
 config = config['config'] || {}
 config = OpenStruct.new(config)
 

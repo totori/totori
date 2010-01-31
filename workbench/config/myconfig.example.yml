@@ -12,9 +12,9 @@ config:
       password: abcd1234
   watir:
     browser: ie
-    speed: fast
+    #speed: fast
     maximize: false
-    bring_to_front: true
+    #bring_to_front: true
   report:
     dir: reports
     screenshots:
