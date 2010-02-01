@@ -3,15 +3,16 @@
 
 ;----------------------------------------------
 
-!define PRODUCT "EPBT (Enterprise Portal Behavior Testing)"
-!define PRODUCT_SHORT "EPBT"
+!define PRODUCT_VERSION "0.0.3"
+!define PRODUCT "EPBT (Enterprise Portal Behavior Testing) ${PRODUCT_VERSION}"
+!define PRODUCT_SHORT "EPBT ${PRODUCT_VERSION}"
 !define RUBY_DIR "C:\Ruby"
 
 ; The name of the installer
 Name "Enteprise Portal Behavior Testing"
 
 ; The file to write
-OutFile "EPBT-setup-0.0.2.exe"
+OutFile "EPBT-setup-${PRODUCT_VERSION}.exe"
 
 ; The default installation directory
 InstallDir $PROGRAMFILES\EPBT
@@ -67,13 +68,13 @@ Section ""
   File thirdparties\gems\windows-api-0.4.0.gem
   File thirdparties\gems\windows-pr-1.0.8.gem
   File thirdparties\gems\xml-simple-1.0.12.gem
-  File thirdparties\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe
-  File thirdparties\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe
+  File "thirdparties\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe"
+  File "thirdparties\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe"
   File thirdparties\firefox\jssh-3.5.x-WINNT.xpi
   File thirdparties\firefox\jssh-3.6-WINNT.xpi
   File thirdparties\firefox\jssh-20080708-WINNT.xpi
   File thirdparties\firefox\jssh-WINNT-2.x.xpi
-  File EPBT-src-0.0.2.zip
+  File EPBT-src-${PRODUCT_VERSION}.zip
   
   ; Set output path to the installation directory.
   ;SetOutPath $INSTDIR
@@ -83,7 +84,7 @@ SectionEnd
 Section "EPBT Sources"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Installing EPBT..."
-  ZipDLL::extractall "$TEMP\EPBT-src-0.0.2.zip" $INSTDIR
+  ZipDLL::extractall "$TEMP\EPBT-src-${PRODUCT_VERSION}.zip" $INSTDIR
 	DetailPrint "success"
 SectionEnd
 
@@ -108,27 +109,29 @@ Section "Environment variable"
 SectionEnd
 
 Section "Devkit"
-  SetOutPath "${RUBY_DIR}"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Installing Windows Development kit..."
+  SetOutPath "${RUBY_DIR}"
   Nsis7z::ExtractWithDetails "$TEMP\devkit-3.4.5r3-20091110.7z" "Installing Windows Development kit %s..."
 	DetailPrint "success"
 SectionEnd
 
 Section "Ruby gems"
-  SetOutPath $TEMP
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Installing Ruby gems..."
+  SetOutPath $TEMP
   nsExec::Exec '"${RUBY_DIR}\bin\gem.bat" install -q -l --no-rdoc --no-ri watir cucumber win32console rspec'
-	Pop $0 # return value/error/timeout
-	DetailPrint "$0"
+	;Pop $0 # return value/error/timeout
+	;DetailPrint "$0"
+  DetailPrint "success"
 SectionEnd
 
 Section "Services registering"
-  SetOutPath "$INSTDIR\workbench"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Registering services..."
-  nsExec::Exec 'setup[as-administrator].bat'
+  SetOutPath "$INSTDIR\workbench"
+  ;nsExec::Exec 'setup[as-administrator].bat'
+  nsExec::Exec '..\ext\nircmd\nircmdc regsvr reg ..\ext\watir\AutoItX3.dll'
 	;Pop $0 # return value/error/timeout
 	;DetailPrint "$0"
   DetailPrint "success"
@@ -155,9 +158,9 @@ Section "Registry"
 	DetailPrint "success"
 SectionEnd
 
-Function .onInstSuccess
-  MessageBox MB_OK "You have successfully installed ${PRODUCT}. Use the desktop icon to start the program."
-FunctionEnd
+;Function .onInstSuccess
+;  MessageBox MB_OK "You have successfully installed ${PRODUCT}. Use the desktop icon to start the program."
+;FunctionEnd
 
 ;----------------------------------------------
 
@@ -179,9 +182,9 @@ Section "Uninstall"
   Call un.EnvVarUpdate
 SectionEnd
 
-Function un.onUninstSuccess
-  MessageBox MB_OK "You have successfully uninstalled ${PRODUCT}."
-FunctionEnd
+;Function un.onUninstSuccess
+;  MessageBox MB_OK "You have successfully uninstalled ${PRODUCT}."
+;FunctionEnd
 
 
 ;Function GetFirefoxVersion
