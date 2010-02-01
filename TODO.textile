@@ -1,1 +1,22 @@
 h1. TODO
+
+h2. Execution
+
+* Allow running specific features
+
+h2. Features
+
+* Measure performance with timestamps before and after each steps and scenarios
+* Enable the use of other browsers than IE
+* Video record each scenarios
+* Integration with SCM / bug tracking tools
+
+h2. Installer
+
+* Use the "OpenCandy Recommandation plug-in":http://nsis.sourceforge.net/OpenCandy_Recommendation_plug-in
+* Associate EPBT with .feature files with the "Application Association Registration plug-in":http://nsis.sourceforge.net/Application_Association_Registration_plug-in
+* Check for firefox version before installing the correct .xpi and microsoft redistribuable
+
+h2. I18n
+
+* Translate all steps to french
