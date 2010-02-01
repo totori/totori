@@ -23,12 +23,25 @@ Cucumber::Rake::Task.new(:run) do |t|
   t.cucumber_opts = "--tags ~@example --format pretty"
 end
 
-# run my own features, output in an html report file
+# run all my features, output in an html report file
 Cucumber::Rake::Task.new(:runreport) do |t|
   t.cucumber_opts = "--tags ~@example --format EPBTFormatter --out #{report_filename}"
   #File.new(report_filename, "w")
   #Launchy.open("#{Dir.pwd}/#{report_filename}")
 end
+
+## run a specific own features, output in an html report file
+#task :runfeature, :feature do |t, args|
+#  
+#end
+#
+##Cucumber::Rake::Task.new(:runfeature) do |t|
+#  puts t.profile
+#  exit
+#  t.cucumber_opts = "features/#{arg}.feature --format EPBTFormatter --out #{report_filename}"
+#  #File.new(report_filename, "w")
+#  #Launchy.open("#{Dir.pwd}/#{report_filename}")
+#end
 
 # run the example features
 Cucumber::Rake::Task.new(:example) do |t|

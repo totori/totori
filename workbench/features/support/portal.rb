@@ -11,10 +11,25 @@ class Portal
     @browser = browser
   end
   
+  ##################################################
+  # Navigation
+  
   # Navigate to a specific URL
   def goto(url)
     @browser.goto(url)
   end
+  
+  ##################################################
+  # Attributes
+  
+  # Table that was accessed for the last time
+  attr_accessor :last_table
+  
+  # Dropdown that was accessed for the last time
+  attr_accessor :last_dropdown
+  
+  ##################################################
+  # Logging
   
   # Test wether we're logged in or not
   def logged_in?
@@ -23,7 +38,8 @@ class Portal
     #rescue
     #  false
     #end
-    @browser.contains_text("Log Off") #TODO should be enhanced
+    #@browser.contains_text("Log Off")
+    @browser.cell(:id, 'welcome_message').exists?
   end
   
   # Connect to the portal using credentials
@@ -42,39 +58,56 @@ class Portal
     end
   end
   
-  # Access the page title bar
-  def page_title_bar
-    e = @browser.span(:xpath, "//table[@id='pageTitleBar']//span[@id='BreadCrumbDiv']")
-    e
+  ##################################################
+  # Portal parts / @see <http://help.sap.com/saphelp_nw70/helpdata/en/02/c7918e9fca44519701c47028a053fd/content.htm>
+  
+  # Access the masthead
+  def masthead
+    nil #TODO
   end
   
-  # Access the current page
-  def current_page
-    e = @browser.frame(:name, /Desktop Innerpage\s*/)
-    e
+  # Access the tools area
+  def tools_area
+    nil #TODO
   end
   
-  # Access the content area
-  def content_area
-    e = current_page.frame(:name, /isolatedWorkArea/)
-    e
-  end
-  
-  # Access the current application
-  def app
-    e = content_area.div(:id, "_SSR_CONTENT_CONTAINER")
-    e
+  # Access the top level navigation
+  def tln
+    @browser.div(:id, 'TLNDiv')
   end
   
   # Access the main tab by its name
   def tln_main_tab(name)
-    @browser.link(:xpath, "//div[@id='TLNDiv']/div[@id='Level1DIV']//a[text()='"+name+"']")
+    tln.div(:id, 'Level1DIV').link(:text, name)
   end
   
   # Access the sub-tab by its name
   def tln_sub_tab(name)
-    @browser.link(:xpath, "//div[@id='TLNDiv']/div[@id='Level2DIV']//a[text()='"+name+"']")
+    tln.div(:id, 'Level2DIV').link(:text, name)
   end
+  
+  # Access the page title bar
+  def page_title_bar
+    @browser.span(:xpath, "//table[@id='pageTitleBar']//span[@id='BreadCrumbDiv']")
+  end
+  
+  # Access the desktop innerpage
+  def current_page
+    @browser.frame(:name, /Desktop Innerpage\s*/)
+  end
+  
+  # Access the content area
+  def content_area
+    current_page.frame(:name, /isolatedWorkArea/)
+  end
+  
+  # Access the current application
+  def app
+    content_area.div(:id, "_SSR_ROOT")
+  end
+  
+  ##################################################
+  # Helpers
   
   # Test if the "message" error is displayed
   def reports_error?(message)
@@ -97,6 +130,15 @@ private
   # * warning
   # * success
   def reports_message?(severity, message)
-    app.div(:class, severity).text.should == message
+    #FIXME
+    # first, let's check directly in the current application iView
+    e = app.div(:class, severity)
+    if e.exists? then
+      e.text.should == message
+    else
+      # then, in the framework page
+      e = @browser.div(:class, severity)
+      e.text.should == message
+    end
   end
 end
