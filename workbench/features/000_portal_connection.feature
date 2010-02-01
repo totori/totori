@@ -1,13 +1,7 @@
-# language: en
-
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
-#
-# Example: Portal connection feature (english)
-#
-
-@example @en
+@example
 Feature: Portal logging in and logging off
   In order to check access the portal
   As a user

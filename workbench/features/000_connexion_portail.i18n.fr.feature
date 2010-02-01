@@ -3,10 +3,6 @@
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
-#
-# Example: Portal connection feature (french)
-#
-
 @example @fr
 Fonctionnalité: Connexion et déconnexion du portail
   Afin de vérifier l'accès au portail

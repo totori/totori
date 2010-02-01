@@ -1,11 +1,13 @@
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
+@example
 Feature: Portal logging in and logging off
   In order to check access the portal
   As a user
   I want to log into the portal and log off
   
+  @example
   Scenario Outline: Unauthorized credentials
     Given I am on the main page
     And I am not logged in
@@ -18,6 +20,7 @@ Feature: Portal logging in and logging off
       | unknown_user_2 | toto     |
       | unknown_user_3 | toto     |
   
+  @example
   Scenario Outline: Authorized credentials
     Given I am on the main page
     And I am not logged in
@@ -28,6 +31,7 @@ Feature: Portal logging in and logging off
       | user           | password |
       | testuser01     | abcd1234 |
   
+  @example
   Scenario: Logging off
     Given I am logged in
     When I log off

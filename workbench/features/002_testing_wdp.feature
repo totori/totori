@@ -1,11 +1,13 @@
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
+@example
 Feature: Testing a custom Web DynPro application
   In order to calculate my age
   As a user
   I want to use the age calculation application
   
+  @example
   Background:
     Given I am on the main page
     And I am not logged in
@@ -13,9 +15,11 @@ Feature: Testing a custom Web DynPro application
     And I click on the "Testing Web Dynpro" main tab in the top-level navigation
     And I click on the "Age calculator" sub-tab in the top-level navigation
   
+  @example
   Scenario: Check if the application is running
     Then I should see "Age calculator" in the page title bar
   
+  @example
   Scenario Outline: Use the application with film directors and time travelers
     When I fill the field "First name" with "<first name>"
     And I fill the field "Last name" with "<last name>"

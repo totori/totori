@@ -1,12 +1,13 @@
 # EPBT - SAP Enterprise Portal Behavior Testing
 # http://github.com/arnaud/EPBT  -  MIT License
 
+@example
 Feature: Portal User Administration
   In order to manage users
   As an admin
   I want to add/edit/delete users and their privileges
   
-  @admin
+  @example
   Background:
     Given I am on the main page
     And I am not logged in
@@ -14,11 +15,11 @@ Feature: Portal User Administration
     And I click on the "User Administration" main tab in the top-level navigation
     #And I click on the "Identity Management" sub-tab in the top-level navigation
   
-  @admin
+  @example
   Scenario: Check if the application is running
     Then I should see "Identity Management" in the page title bar
   
-  @admin
+  @example
   Scenario Outline: Create a new user
     When I click on the button "Create User"
     And I fill the field "Logon ID" with "<user>"
@@ -37,7 +38,7 @@ Feature: Portal User Administration
       | test01 | init1234 | Steven     | Spielberg | en         | success      | User created |
       | test02 | init1234 | Stanley    | Kubrick   | en         | success      | User created |
   
-  @admin
+  @example
   Scenario Outline: Delete an existing user
     When I click on the "Search" navigation tray menu
     And I select "Show All" in its menu
