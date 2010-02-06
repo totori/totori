@@ -1,5 +1,5 @@
-# EPBT - SAP Enterprise Portal Behavior Testing
-# http://github.com/arnaud/EPBT  -  MIT License
+# Totori - User Acceptance Testing Workbench
+# http://github.com/arnaud/totori - MIT License
 #
 # Original file from <http://github.com/raldred/cucumber_textmate/blob/master/textmate_formatter.rb>
 
@@ -8,7 +8,7 @@ require 'cucumber/formatter/duration'
 
 # module Cucumber
 #   module Formatter
-class EPBTFormatter
+class TotoriFormatter
   include ERB::Util # for the #h method
   include Cucumber::Formatter::Duration
 
@@ -39,7 +39,7 @@ class EPBTFormatter
     @builder << '<html xmlns ="http://www.w3.org/1999/xhtml">'
       @builder.head do
       @builder.meta(:content => 'text/html;charset=utf-8')
-      @builder.title 'EPBT Report'
+      @builder.title 'Totori Report'
       inline_css
       inline_js
     end
@@ -48,7 +48,7 @@ class EPBTFormatter
     @builder << '<div class="cucumber">'
     @builder.div(:id => 'cucumber-header') do
       @builder.div(:id => 'label') do
-        @builder.h1('EPBT Report')
+        @builder.h1('Totori Report')
       end
       @builder.div(:id => 'summary') do
         @builder.p('',:id => 'totals')
@@ -396,7 +396,7 @@ class EPBTFormatter
       #@builder.style(:type => 'text/css') do
       #  @builder << File.read(File.dirname(__FILE__) + '/cucumber-textmate.css')
       #end
-      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/epbt.css')
+      @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/totori.css')
       @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/jquery.lightbox-0.5.css', :media => 'screen')
       @builder.link(:type => 'text/css', :rel => 'stylesheet', :href => 'assets/thumbs.css', :media => 'screen')
     end

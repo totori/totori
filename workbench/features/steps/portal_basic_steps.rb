@@ -1,5 +1,5 @@
-# EPBT - SAP Enterprise Portal Behavior Testing
-# http://github.com/arnaud/EPBT  -  MIT License
+# Totori - User Acceptance Testing Workbench
+# http://github.com/arnaud/totori - MIT License
 
 #
 # Portal basic steps (english)
@@ -22,7 +22,7 @@ Given /^I am logged in$/ do
   if !@portal.logged_in?
     Given("I am on the main page")
     user = @config.portal['valid_credential']
-    Given("I log in with credentials #{user[:name]} and #{user[:password]}")
+    Given("I log in with credentials #{user[:login]} and #{user[:password]}")
   end
   if !@portal.logged_in?
     raise "Authentication error"

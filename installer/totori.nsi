@@ -1,27 +1,26 @@
-; EPBT - SAP Enterprise Portal Behavior Testing
-; http://github.com/arnaud/EPBT  -  MIT License
+# Totori - User Acceptance Testing Workbench
+# http://github.com/arnaud/totori - MIT License
 
 ;----------------------------------------------
 
 !define PRODUCT_VERSION "0.0.4"
-!define PRODUCT "EPBT (Enterprise Portal Behavior Testing) ${PRODUCT_VERSION}"
-!define PRODUCT_SHORT "EPBT ${PRODUCT_VERSION}"
+!define PRODUCT "Totori ${PRODUCT_VERSION}"
 !define RUBY_DIR "C:\Ruby"
 
 ; The name of the installer
-Name "Enteprise Portal Behavior Testing"
+Name "Totori - User Acceptance Testing Framework"
 
 ; The file to write
-OutFile "EPBT-setup-${PRODUCT_VERSION}.exe"
+OutFile "Totori-setup-${PRODUCT_VERSION}.exe"
 
 ; The default installation directory
-InstallDir $PROGRAMFILES\EPBT
+InstallDir $PROGRAMFILES\Totori
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
 
 ; Installer icon
-Icon "epbt.ico"
+Icon "totori.ico"
 
 ;----------------------------------------------
 
@@ -77,17 +76,17 @@ Section ""
   File thirdparties\firefox\jssh-3.6-WINNT.xpi
   File thirdparties\firefox\jssh-20080708-WINNT.xpi
   File thirdparties\firefox\jssh-WINNT-2.x.xpi
-  File EPBT-src-${PRODUCT_VERSION}.zip
+  File Totori-src-${PRODUCT_VERSION}.zip
   
   ; Set output path to the installation directory.
   ;SetOutPath $INSTDIR
   
 SectionEnd
 
-Section "EPBT Sources"
+Section "Totori Sources"
 	DetailPrint "--------------------------------------------------------------------------------"
-	DetailPrint "Installing EPBT..."
-  ZipDLL::extractall "$TEMP\EPBT-src-${PRODUCT_VERSION}.zip" $INSTDIR
+	DetailPrint "Installing Totori..."
+  ZipDLL::extractall "$TEMP\Totori-src-${PRODUCT_VERSION}.zip" $INSTDIR
 	DetailPrint "success"
 SectionEnd
 
@@ -146,17 +145,17 @@ Section "Shortcut"
 ;desktop shortcut
   CreateShortCut "$DESKTOP\${PRODUCT}.lnk" "$INSTDIR\workbench" ""
 ;start-menu items
-  CreateDirectory "$SMPROGRAMS\${PRODUCT_SHORT}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_SHORT}\${PRODUCT}.lnk" "$INSTDIR\workbench" "" "$INSTDIR\workbench" 0
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_SHORT}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
+  CreateDirectory "$SMPROGRAMS\${PRODUCT}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk" "$INSTDIR\workbench" "" "$INSTDIR\workbench" 0
+  CreateShortCut "$SMPROGRAMS\${PRODUCT}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
 	DetailPrint "success"
 SectionEnd
 
 Section "Registry"
 	DetailPrint "--------------------------------------------------------------------------------"
 	DetailPrint "Setting up the registry..."
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_SHORT}" "DisplayName" "${PRODUCT_SHORT} (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_SHORT}" "UninstallString" "$INSTDIR\Uninstall.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}" "DisplayName" "${PRODUCT} (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 	DetailPrint "success"
 SectionEnd
@@ -173,10 +172,10 @@ Section "Uninstall"
   RMDir "$INSTDIR"
 ;delete desktop & start menu shortcuts
   Delete "$DESKTOP\${PRODUCT}.lnk"
-  RMDir /r "$SMPROGRAMS\${PRODUCT_SHORT}"
+  RMDir /r "$SMPROGRAMS\${PRODUCT}"
 ;delete uninstaller and unistall registry entries
-  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\${PRODUCT_SHORT}"
-  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_SHORT}"
+  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\${PRODUCT}"
+  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}"
 ;delete the environment variable
   Push "PATH"
   Push "R"

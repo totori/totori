@@ -1,4 +1,4 @@
-:: EPBT - SAP Enterprise Portal Behavior Testing
-:: http://github.com/arnaud/EPBT  -  MIT License
+:: Totori - User Acceptance Testing Workbench
+:: http://github.com/arnaud/totori - MIT License
 
 rake runreport

@@ -1,28 +1,27 @@
-h1. *EPBT(SAP Enterprise Portal Behavior Testing)* - SAP Enterprise Portal Behavior Testing
+h1. *Totori*
 
-p. _Portal behavior testing and automated non-regression testing for building, extending and maintaining long-term SAP Portal applications_
+p. _Totori - the User Acceptance Testing Framework_
 
 h2. Overview
 
 h3. Features
 
-*EPBT(SAP Enterprise Portal Behavior Testing)* aims to regroup the following features:
+*Totori* aims to regroup the following features:
 
-* Behavior testing environment aimed to SAP EP(Enterprise Portal) (Enterprise Portal)
-* One-click non regression testing of SAP web applications
-* Support for: Java Web DynPro (7.0, CE7.1), BSP, JSP, Enterprise Portal Applications
+* User Acceptance validation tool aimed to SAP EP(Enterprise Portal) (for the moment)
+* One-click non regression testing of web applications
 * Can be used to support "BDD(Behavior Driven Development)":http://en.wikipedia.org/wiki/Behavior_Driven_Development (Behavior Driven Development)
 
 h3. Status
 
-EPBT(SAP Enterprise Portal Behavior Testing) development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.3":http://github.com/arnaud/EPBT/downloads.
+Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.3":http://github.com/arnaud/totori/downloads.
 
 h3. Installation
 
-If running Windows, you can install EPBT with "*+EPBT one click installer+*":http://cloud.github.com/downloads/arnaud/EPBT/EPBT-setup-0.0.3.exe.
+If running Windows, you can install Totori with "*+Totori one-click installer+*":http://cloud.github.com/downloads/arnaud/totori/Totori-setup-0.0.4.exe.
 It's an offline, self-contained, fully-featured installation executable.
 
-For more information about the installation, see the github "Installation":http://github.com/arnaud/EPBT/wikis/installation wiki page.
+For more information about the installation, see the github "Installation":http://github.com/arnaud/totori/wikis/installation wiki page.
 
 h2. Running tests
 
@@ -34,7 +33,7 @@ bq. rake runreport
 
 h2. License
 
-* EPBT(SAP Enterprise Portal Behavior Testing) is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
+* Totori is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
 * SAP EP(Enterprise Portal) is copyrighted "SAP AG":http://www.sap.com/. All Rights Reserved.
 
 h2. Contributors

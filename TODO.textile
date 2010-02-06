@@ -14,7 +14,7 @@ h2. Features
 
 h2. Installer
 
-* Associate EPBT with .feature files with the "Application Association Registration plug-in":http://nsis.sourceforge.net/Application_Association_Registration_plug-in
+* Associate Totori with .feature files with the "Application Association Registration plug-in":http://nsis.sourceforge.net/Application_Association_Registration_plug-in
 * Check for firefox version before installing the correct .xpi and microsoft redistribuable
 * Use the "OpenCandy Recommandation plug-in":http://nsis.sourceforge.net/OpenCandy_Recommendation_plug-in
 
