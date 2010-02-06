@@ -3,7 +3,7 @@
 
 ;----------------------------------------------
 
-!define PRODUCT_VERSION "0.0.3"
+!define PRODUCT_VERSION "0.0.4"
 !define PRODUCT "EPBT (Enterprise Portal Behavior Testing) ${PRODUCT_VERSION}"
 !define PRODUCT_SHORT "EPBT ${PRODUCT_VERSION}"
 !define RUBY_DIR "C:\Ruby"
@@ -19,6 +19,9 @@ InstallDir $PROGRAMFILES\EPBT
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
+
+; Installer icon
+Icon "epbt.ico"
 
 ;----------------------------------------------
 
