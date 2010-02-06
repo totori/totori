@@ -1,6 +1,6 @@
 h1. *Totori*
 
-p. _Totori - the User Acceptance Testing Framework_
+p. _Totori - the User Acceptance Testing Workbench
 
 h2. Overview
 

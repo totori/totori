@@ -8,7 +8,7 @@
 !define RUBY_DIR "C:\Ruby"
 
 ; The name of the installer
-Name "Totori - User Acceptance Testing Framework"
+Name "Totori - User Acceptance Testing Workbench"
 
 ; The file to write
 OutFile "Totori-setup-${PRODUCT_VERSION}.exe"
