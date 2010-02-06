@@ -1,6 +1,6 @@
 h1. *Totori*
 
-p. _Totori - the User Acceptance Testing Workbench
+p. _Totori - the User Acceptance Testing Workbench_
 
 h2. Overview
 
@@ -14,7 +14,7 @@ h3. Features
 
 h3. Status
 
-Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.3":http://github.com/arnaud/totori/downloads.
+Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.4":http://github.com/arnaud/totori/downloads.
 
 h3. Installation
 
