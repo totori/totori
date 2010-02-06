@@ -1,3 +1,6 @@
+installer/*.zip
+installer/*.exe
+installer/thirdparties/*
 workbench/config/myconfig.yml
 workbench/reports/*.html
 workbench/reports/screens/*
