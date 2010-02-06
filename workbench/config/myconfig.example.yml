@@ -5,18 +5,56 @@
 # Configuration
 #
 config:
+  
   portal:
+    
+    # This is the root URL of your portal
+    # (i.e. http://myserver:50000/irj/portal)
     root_url: http://srm.tatamotors.com/irj/portal
+    
+    # These credentials will be used as default for logging in the portal
     valid_credential:
       name: user_01
       password: abcd1234
+    
   watir:
+    
+    # Choose the browser used for the automated behavior testing
+    # Available values: ie, firefox, chrome, safari, celerity
     browser: ie
-    #speed: fast
+    
+    # Determines the speed at which the browser tests occur
+    # Available values: slow, normal, fast
+    # WARNING: Only works for the IE browser - should be commented else
+    speed: fast
+    
+    # Maximizes the browser window at launch
+    # Available values: true, false
     maximize: false
-    #bring_to_front: true
+    
+    # Brings the browser to front at launch
+    # Available values: true, false
+    # WARNING: Only works for the IE browser - should be commented else
+    bring_to_front: true
+    
   report:
+    
+    # Directory of the generated reports
+    # (i.e. reports)
     dir: reports
+    
+    # Reports's embedded screenshots
     screenshots:
+      
+      # Time screenshots should be taken at
+      # Available values:
+      # - never
+      # - each scenario
+      # - each failed scenario
+      # - each step
+      # - each failed step
       after: each failed step
+      
+      # Directory of the generated reports' screenshots
+      # (i.e. screens)
       dir: screens
