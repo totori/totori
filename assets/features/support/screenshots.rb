@@ -18,7 +18,7 @@ module Screenshots
     end
   elsif Cucumber::WINDOWS
     def take_screenshot(id)
-      `..\\ext\\nircmd\\nircmd savescreenshotwin #{@config.report['dir']}\\#{@config.report['screenshots']['dir']}\\#{id}.png`
+      `ext\\nircmd\\nircmd savescreenshotwin #{@config.report['dir']}\\#{@config.report['screenshots']['dir']}\\#{id}.png`
     end
   else
     # Other platforms...
