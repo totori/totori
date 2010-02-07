@@ -1,6 +1,8 @@
+.settings
+assets/config/myconfig.yml
+assets/reports/*.html
+assets/reports/screens/*
+bin
 installer/*.zip
 installer/*.exe
 installer/thirdparties/*
-workbench/config/myconfig.yml
-workbench/reports/*.html
-workbench/reports/screens/*
