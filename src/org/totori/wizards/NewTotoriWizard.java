@@ -2,14 +2,17 @@ package org.totori.wizards;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -102,47 +105,78 @@ public class NewTotoriWizard extends Wizard implements INewWizard {
       try
       {
          IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-         monitor.subTask("Creating subdirectories");
+         monitor.subTask("Defining the nature of the project");
          IProject project = root.getProject(page.getProjectName());
          IProjectDescription description = ResourcesPlugin.getWorkspace().newProjectDescription(project.getName());
          if(!Platform.getLocation().equals(page.getLocationPath()))
             description.setLocation(page.getLocationPath());
          project.create(description,monitor);
-         monitor.worked(20);
+         monitor.worked(10);
          project.open(monitor);
          description = project.getDescription();
          description.setNatureIds(new String[] { TotoriNature.NATURE_ID });
          project.setDescription(description,new SubProgressMonitor(monitor,10));
-         IPath projectPath = project.getFullPath(),
-	           stepsPath = projectPath.append("steps"),
-	           reportsPath = projectPath.append("reports"),
-	           reportsAssetsPath = reportsPath.append("assets");
-         IFolder stepsFolder = root.getFolder(stepsPath),
-                 reportsFolder = root.getFolder(reportsPath),
-                 reportsAssetsFolder = root.getFolder(reportsAssetsPath);
-         createFolderHelper(stepsFolder,monitor);
-         createFolderHelper(reportsFolder,monitor);
-         createFolderHelper(reportsAssetsFolder,monitor);
-         monitor.worked(10);
+         monitor.subTask("Creating subdirectories");
+         createFolderHelper(root.getFolder(project.getFullPath().append("config")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("ext")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("ext").append("nircmd")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("ext").append("watir")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("plugins")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("plugins").append("sap-ep")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("plugins").append("sap-ep").append("examples")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("plugins").append("sap-ep").append("steps")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("steps")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("features").append("support")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("reports")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("reports").append("assets")), monitor);
+         createFolderHelper(root.getFolder(project.getFullPath().append("reports").append("screens")), monitor);
+         project.setDescription(description,new SubProgressMonitor(monitor,10));
          monitor.subTask("Creating files");
-         Map<String, InputStream> assets = new HashMap<String, InputStream>();
-         assets.put("jquery-1.4.1.min.js", this.getClass().getResourceAsStream("assets/reports/jquery-1.4.1.min.js"));
-         assets.put("jquery.lightbox-0.5.css", this.getClass().getResourceAsStream("assets/reports/jquery.lightbox-0.5.css"));
-         assets.put("jquery.lightbox-0.5.min.js", this.getClass().getResourceAsStream("assets/reports/jquery.lightbox-0.5.min.js"));
-         assets.put("jquery.thumbs.js", this.getClass().getResourceAsStream("assets/reports/jquery.thumbs.js"));
-         assets.put("lightbox-blank.gif", this.getClass().getResourceAsStream("assets/reports/lightbox-blank.gif"));
-         assets.put("lightbox-btn-close.gif", this.getClass().getResourceAsStream("assets/reports/lightbox-btn-close.gif"));
-         assets.put("lightbox-btn-next.gif", this.getClass().getResourceAsStream("assets/reports/lightbox-btn-next.gif"));
-         assets.put("lightbox-btn-prev.gif", this.getClass().getResourceAsStream("assets/reports/lightbox-btn-prev.gif"));
-         assets.put("lightbox-ico-loading.gif", this.getClass().getResourceAsStream("assets/reports/lightbox-ico-loading.gif"));
-         assets.put("search.png", this.getClass().getResourceAsStream("assets/reports/search.png"));
-         assets.put("thumbs.css", this.getClass().getResourceAsStream("assets/reports/thumbs.css"));
-         assets.put("totori.css", this.getClass().getResourceAsStream("assets/reports/totori.css"));
-         for(String assetName : assets.keySet()) {
-        	 InputStream in = assets.get(assetName);
-             IPath indexPath = reportsAssetsPath.append(assetName);
-             IFile indexFile = root.getFile(indexPath);
-             indexFile.create(in, false, monitor);
+         Vector<String> assets = new Vector<String>();
+         assets.add("config/myconfig.example.yml");
+         assets.add("ext/nircmd/nircmd.chm");
+         assets.add("ext/nircmd/nircmd.exe");
+         assets.add("ext/nircmd/nircmdc.exe");
+         assets.add("ext/watir/AutoItX3.dll");
+         assets.add("ext/watir/IEDialog.dll");
+         assets.add("ext/watir/README");
+         assets.add("ext/watir/win32ole.so");
+         assets.add("features/plugins/sap-ep/portal.rb");
+         assets.add("features/plugins/sap-ep/examples/001_connexion_portail.i18n.fr.feature");
+         assets.add("features/plugins/sap-ep/examples/001_logging_in_and_off.feature");
+         assets.add("features/plugins/sap-ep/examples/002_custom_wdp_application.feature");
+         assets.add("features/plugins/sap-ep/examples/003_user_administration.feature");
+         assets.add("features/plugins/sap-ep/steps/portal_basic_steps.i18n.fr.rb");
+         assets.add("features/plugins/sap-ep/steps/portal_basic_steps.rb");
+         assets.add("features/support/env.rb");
+         assets.add("features/support/functions.rb");
+         assets.add("features/support/screenshots.rb");
+         assets.add("features/support/totori_formatter.rb");
+         assets.add("reports/assets/jquery-1.4.1.min.js");
+         assets.add("reports/assets/jquery.lightbox-0.5.css");
+         assets.add("reports/assets/jquery.lightbox-0.5.min.js");
+         assets.add("reports/assets/jquery.thumbs.js");
+         assets.add("reports/assets/lightbox-blank.gif");
+         assets.add("reports/assets/lightbox-btn-close.gif");
+         assets.add("reports/assets/lightbox-btn-next.gif");
+         assets.add("reports/assets/lightbox-btn-prev.gif");
+         assets.add("reports/assets/lightbox-ico-loading.gif");
+         assets.add("reports/assets/search.png");
+         assets.add("reports/assets/thumbs.css");
+         assets.add("reports/assets/totori.css");
+         for(String asset : assets) {
+        	 String resource = "/assets/"+asset;
+        	 InputStream stream = this.getClass().getResourceAsStream(resource);
+        	 System.out.println(resource + " : " + stream);
+             IPath path = project.getFullPath();
+             for(String dir : asset.split("/")) {
+            	 path = path.append(dir);
+             }
+             IFile file = root.getFile(path);
+             //file.getFullPath().toFile().mkdirs();
+             //file.setCharset("utf-8", monitor);
+             file.create(stream, false, monitor);
          }
          monitor.worked(20);
       }
@@ -164,7 +198,7 @@ public class NewTotoriWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
-
+	
    /**
     * Displays an error that occured during the project creation.
     * @param x details on the error
@@ -181,7 +215,7 @@ public class NewTotoriWizard extends Wizard implements INewWizard {
                                                            : x.toString(),
                                     x));
    }
-
+   
    /**
     * Helper method: it recursively creates a folder path.
     * @param folder
@@ -189,7 +223,7 @@ public class NewTotoriWizard extends Wizard implements INewWizard {
     * @throws CoreException
     * @see java.io.File#mkdirs()
     */
-   private void createFolderHelper(IFolder folder,IProgressMonitor monitor)
+   private void createFolderHelper(final IFolder folder,final IProgressMonitor monitor)
       throws CoreException
    {
       if(!folder.exists())
