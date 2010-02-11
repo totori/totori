@@ -14,14 +14,14 @@ h3. Features
 
 h3. Status
 
-Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.4":http://github.com/arnaud/totori/downloads.
+Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.4":http://github.com/totori/totori/downloads.
 
 h3. Installation
 
-If running Windows, you can install Totori with "*+Totori one-click installer+*":http://cloud.github.com/downloads/arnaud/totori/Totori-setup-0.0.4.exe.
+If running Windows, you can install Totori with "*+Totori one-click installer+*":http://cloud.github.com/downloads/totori/totori/Totori-setup-0.0.4.exe.
 It's an offline, self-contained, fully-featured installation executable.
 
-For more information about the installation, see the github "Installation":http://github.com/arnaud/totori/wikis/installation wiki page.
+For more information about the installation, see the github "Installation":http://github.com/totori/totori/wikis/installation wiki page.
 
 h2. Running tests
 

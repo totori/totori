@@ -1,5 +1,5 @@
 # Totori - User Acceptance Testing Workbench
-# http://github.com/arnaud/totori - MIT License
+# http://github.com/totori/totori - MIT License
 #
 # Original file from <http://github.com/raldred/cucumber_textmate/blob/master/textmate_formatter.rb>
 
