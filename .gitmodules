@@ -1,3 +1,6 @@
 [submodule "totori/server"]
 	path = totori/server
-	url = git@github.com:totori/totori-server.git
+	url = git://github.com/totori/totori-server.git
+[submodule "totori/workbench"]
+	path = totori/workbench
+	url = git://github.com/totori/totori-workbench.git
