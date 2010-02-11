@@ -1,0 +1,3 @@
+[submodule "totori/server"]
+	path = totori/server
+	url = git@github.com:totori/totori-server.git
