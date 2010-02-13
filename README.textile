@@ -10,7 +10,7 @@ Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/
 
 h3. Installation
 
-See http://totori.org/
+See "http://totori.org/":http://totori.org/
 
 h2. License
 
