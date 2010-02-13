@@ -4,37 +4,17 @@ p. _Totori - the User Acceptance Testing Workbench_
 
 h2. Overview
 
-h3. Features
-
-*Totori* aims to regroup the following features:
-
-* User Acceptance validation tool aimed to SAP EP(Enterprise Portal) (for the moment)
-* One-click non regression testing of web applications
-* Can be used to support "BDD(Behavior Driven Development)":http://en.wikipedia.org/wiki/Behavior_Driven_Development (Behavior Driven Development)
-
 h3. Status
 
-Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha and its latest version is "0.0.4":http://github.com/totori/totori/downloads.
+Totori development status is currently "Pre-Alpha":http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-Alpha.
 
 h3. Installation
 
-If running Windows, you can install Totori with "*+Totori one-click installer+*":http://cloud.github.com/downloads/totori/totori/Totori-setup-0.0.4.exe.
-It's an offline, self-contained, fully-featured installation executable.
-
-For more information about the installation, see the github "Installation":http://github.com/totori/totori/wikis/installation wiki page.
-
-h2. Running tests
-
-bq. run-report.bat
-
-or the command line version:
-
-bq. rake runreport
+See http://totori.org/
 
 h2. License
 
-* Totori is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
-* SAP EP(Enterprise Portal) is copyrighted "SAP AG":http://www.sap.com/. All Rights Reserved.
+Totori is licensed under the original "MIT license":http://creativecommons.org/licenses/MIT/.
 
 h2. Contributors
 
