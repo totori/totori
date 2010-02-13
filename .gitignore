@@ -1,7 +1,3 @@
-.settings
-assets/config/myconfig.yml
-assets/reports/*.html
-assets/reports/screens/*
 bin
 installer/*.zip
 installer/*.exe
