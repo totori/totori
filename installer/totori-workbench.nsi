@@ -1,5 +1,5 @@
 # Totori - User Acceptance Testing Workbench
-# http://github.com/totori/totori - MIT License
+# http://totori.org/ - MIT License
 
 ;----------------------------------------------
 
