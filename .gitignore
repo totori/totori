@@ -1,4 +1,5 @@
 bin
-installer/*.zip
 installer/*.exe
+installer/*.jar
+installer/*.zip
 installer/thirdparties/*
