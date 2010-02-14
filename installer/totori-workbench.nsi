@@ -8,7 +8,7 @@ RequestExecutionLevel admin
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
 !define PRODUCT_NAME "Totori workbench"
-!define VERSION 0.0.4
+!define VERSION 0.0.5
 !define COMPANY Totori
 !define URL http://totori.org/
 !define DESCRIPTION "Totori - User Acceptance Testing Workbench"
@@ -67,7 +67,8 @@ Section !Totori SEC0000
     DetailPrint "--------------------------------------------------------------------------------"
     DetailPrint "Installing Totori workbench..."
     SetOutPath $INSTDIR\plugins
-    SetOverwrite on
+    SetOverwrite off
+    File thirdparties\org.jupeter.yaml_editor_1.0.2.jar
     File ${TOTORI_ECLIPSE_PLUGIN}
     !insertmacro CREATE_SMGROUP_SHORTCUT "Totori workbench" $INSTDIR
     SetOutPath $DESKTOP
@@ -123,7 +124,6 @@ SectionGroup Ruby SECGRP0000
             File thirdparties\gems\gemcutter-0.3.0.gem
             File thirdparties\gems\hoe-2.3.3.gem
             File thirdparties\gems\json_pure-1.2.0.gem
-            File thirdparties\gems\launchy-0.3.5.gem
             File thirdparties\gems\nokogiri-1.4.0-x86-mingw32.gem
             File thirdparties\gems\polyglot-0.2.9.gem
             File thirdparties\gems\rake-0.8.7.gem
@@ -171,6 +171,7 @@ SectionGroup Watir SECGRP0002
             SetOutPath $TEMP
             SetOverwrite on
             File thirdparties\firefox\jssh-3.6-WINNT.xpi
+            nsExec::Exec 'firefox -install-global-extension $TEMP\jssh-3.6-WINNT.xpi'
             WriteRegStr HKLM "${REGKEY}\Components" "Firefox 3.6" 1
             DetailPrint "success"
         SectionEnd
@@ -181,7 +182,9 @@ SectionGroup Watir SECGRP0002
             SetOutPath $TEMP
             SetOverwrite on
             File thirdparties\firefox\jssh-3.5.x-WINNT.xpi
+            nsExec::Exec 'firefox -install-global-extension $TEMP\jssh-3.5.x-WINNT.xpi'
             File "thirdparties\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe"
+            nsExec::Exec '"$TEMP\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe" /Q'
             WriteRegStr HKLM "${REGKEY}\Components" "Firefox 3.5" 1
             DetailPrint "success"
         SectionEnd
@@ -192,7 +195,9 @@ SectionGroup Watir SECGRP0002
             SetOutPath $TEMP
             SetOverwrite on
             File thirdparties\firefox\jssh-20080708-WINNT.xpi
+            nsExec::Exec 'firefox -install-global-extension $TEMP\jssh-20080708-WINNT.xpi'
             File "thirdparties\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe"
+            nsExec::Exec '"$TEMP\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe" /Q'
             WriteRegStr HKLM "${REGKEY}\Components" "Firefox 3.0" 1
             DetailPrint "success"
         SectionEnd
@@ -203,6 +208,7 @@ SectionGroup Watir SECGRP0002
             SetOutPath $TEMP
             SetOverwrite on
             File thirdparties\firefox\jssh-WINNT-2.x.xpi
+            nsExec::Exec 'firefox -install-global-extension $TEMP\jssh-WINNT-2.x.xpi'
             WriteRegStr HKLM "${REGKEY}\Components" "Firefox 2.0" 1
             DetailPrint "success"
         SectionEnd
@@ -248,24 +254,24 @@ done${UNSECTION_ID}:
 !macroend
 
 Section /o "-un.Firefox 2.0" UNSEC0008
-    Delete /REBOOTOK $INSTDIR\jssh-WINNT-2.x.xpi
+    Delete /REBOOTOK $TEMP\jssh-WINNT-2.x.xpi
     DeleteRegValue HKLM "${REGKEY}\Components" "Firefox 2.0"
 SectionEnd
 
 Section /o "-un.Firefox 3.0" UNSEC0007
-    Delete /REBOOTOK "$INSTDIR\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe"
-    Delete /REBOOTOK $INSTDIR\jssh-20080708-WINNT.xpi
+    Delete /REBOOTOK "$TEMP\Microsoft Visual C++ 2005 SP1 Redistributable Package (x86).exe"
+    Delete /REBOOTOK $TEMP\jssh-20080708-WINNT.xpi
     DeleteRegValue HKLM "${REGKEY}\Components" "Firefox 3.0"
 SectionEnd
 
 Section /o "-un.Firefox 3.5" UNSEC0006
-    Delete /REBOOTOK "$INSTDIR\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe"
-    Delete /REBOOTOK $INSTDIR\jssh-3.5.x-WINNT.xpi
+    Delete /REBOOTOK "$TEMP\Microsoft Visual C++ 2008 SP1 Redistributable Package (x86).exe"
+    Delete /REBOOTOK $TEMP\jssh-3.5.x-WINNT.xpi
     DeleteRegValue HKLM "${REGKEY}\Components" "Firefox 3.5"
 SectionEnd
 
 Section /o "-un.Firefox 3.6" UNSEC0005
-    Delete /REBOOTOK $INSTDIR\jssh-3.6-WINNT.xpi
+    Delete /REBOOTOK $TEMP\jssh-3.6-WINNT.xpi
     DeleteRegValue HKLM "${REGKEY}\Components" "Firefox 3.6"
 SectionEnd
 
@@ -277,41 +283,40 @@ Section /o -un.AutoItX3 UNSEC0004
 SectionEnd
 
 Section /o "-un.Ruby gems" UNSEC0003
-    Delete /REBOOTOK $INSTDIR\xml-simple-1.0.12.gem
-    Delete /REBOOTOK $INSTDIR\windows-pr-1.0.8.gem
-    Delete /REBOOTOK $INSTDIR\windows-api-0.4.0.gem
-    Delete /REBOOTOK $INSTDIR\win32-process-0.6.1.gem
-    Delete /REBOOTOK $INSTDIR\win32console-1.2.0-x86-mingw32.gem
-    Delete /REBOOTOK $INSTDIR\win32-api-1.4.5.gem
-    Delete /REBOOTOK $INSTDIR\watir-1.6.5.gem
-    Delete /REBOOTOK $INSTDIR\user-choices-1.1.6.gem
-    Delete /REBOOTOK $INSTDIR\treetop-1.4.2.gem
-    Delete /REBOOTOK $INSTDIR\term-ansicolor-1.0.4.gem
-    Delete /REBOOTOK $INSTDIR\syntax-1.0.0.gem
-    Delete /REBOOTOK $INSTDIR\safariwatir-0.3.7.gem
-    Delete /REBOOTOK $INSTDIR\s4t-utils-1.0.4.gem
-    Delete /REBOOTOK $INSTDIR\rubyforge-2.0.3.gem
-    Delete /REBOOTOK $INSTDIR\rspec-1.2.9.gem
-    Delete /REBOOTOK $INSTDIR\rake-0.8.7.gem
-    Delete /REBOOTOK $INSTDIR\polyglot-0.2.9.gem
-    Delete /REBOOTOK $INSTDIR\nokogiri-1.4.0-x86-mingw32.gem
-    Delete /REBOOTOK $INSTDIR\launchy-0.3.5.gem
-    Delete /REBOOTOK $INSTDIR\json_pure-1.2.0.gem
-    Delete /REBOOTOK $INSTDIR\hoe-2.3.3.gem
-    Delete /REBOOTOK $INSTDIR\gemcutter-0.3.0.gem
-    Delete /REBOOTOK $INSTDIR\firewatir-1.6.5.gem
-    Delete /REBOOTOK $INSTDIR\diff-lcs-1.1.2.gem
-    Delete /REBOOTOK $INSTDIR\cucumber-0.4.4.gem
-    Delete /REBOOTOK $INSTDIR\configuration-1.1.0.gem
-    Delete /REBOOTOK $INSTDIR\commonwatir-1.6.5.gem
-    Delete /REBOOTOK $INSTDIR\chromewatir-1.5.1.gem
-    Delete /REBOOTOK $INSTDIR\builder-2.1.2.gem
-    Delete /REBOOTOK $INSTDIR\activesupport-2.3.5.gem
+    Delete /REBOOTOK $TEMP\xml-simple-1.0.12.gem
+    Delete /REBOOTOK $TEMP\windows-pr-1.0.8.gem
+    Delete /REBOOTOK $TEMP\windows-api-0.4.0.gem
+    Delete /REBOOTOK $TEMP\win32-process-0.6.1.gem
+    Delete /REBOOTOK $TEMP\win32console-1.2.0-x86-mingw32.gem
+    Delete /REBOOTOK $TEMP\win32-api-1.4.5.gem
+    Delete /REBOOTOK $TEMP\watir-1.6.5.gem
+    Delete /REBOOTOK $TEMP\user-choices-1.1.6.gem
+    Delete /REBOOTOK $TEMP\treetop-1.4.2.gem
+    Delete /REBOOTOK $TEMP\term-ansicolor-1.0.4.gem
+    Delete /REBOOTOK $TEMP\syntax-1.0.0.gem
+    Delete /REBOOTOK $TEMP\safariwatir-0.3.7.gem
+    Delete /REBOOTOK $TEMP\s4t-utils-1.0.4.gem
+    Delete /REBOOTOK $TEMP\rubyforge-2.0.3.gem
+    Delete /REBOOTOK $TEMP\rspec-1.2.9.gem
+    Delete /REBOOTOK $TEMP\rake-0.8.7.gem
+    Delete /REBOOTOK $TEMP\polyglot-0.2.9.gem
+    Delete /REBOOTOK $TEMP\nokogiri-1.4.0-x86-mingw32.gem
+    Delete /REBOOTOK $TEMP\json_pure-1.2.0.gem
+    Delete /REBOOTOK $TEMP\hoe-2.3.3.gem
+    Delete /REBOOTOK $TEMP\gemcutter-0.3.0.gem
+    Delete /REBOOTOK $TEMP\firewatir-1.6.5.gem
+    Delete /REBOOTOK $TEMP\diff-lcs-1.1.2.gem
+    Delete /REBOOTOK $TEMP\cucumber-0.4.4.gem
+    Delete /REBOOTOK $TEMP\configuration-1.1.0.gem
+    Delete /REBOOTOK $TEMP\commonwatir-1.6.5.gem
+    Delete /REBOOTOK $TEMP\chromewatir-1.5.1.gem
+    Delete /REBOOTOK $TEMP\builder-2.1.2.gem
+    Delete /REBOOTOK $TEMP\activesupport-2.3.5.gem
     DeleteRegValue HKLM "${REGKEY}\Components" "Ruby gems"
 SectionEnd
 
 Section /o "-un.Development kit" UNSEC0002
-    Delete /REBOOTOK $INSTDIR\devkit-3.4.5r3-20091110.7z
+    Delete /REBOOTOK $TEMP\devkit-3.4.5r3-20091110.7z
     DeleteRegValue HKLM "${REGKEY}\Components" "Development kit"
 SectionEnd
 
@@ -327,6 +332,7 @@ Section /o -un.Totori UNSEC0000
     DeleteRegValue HKEY_LOCAL_MACHINE Software\Totori\Workbench Version
     Delete /REBOOTOK "$DESKTOP\Totori workbench.lnk"
     !insertmacro DELETE_SMGROUP_SHORTCUT "Totori workbench"
+    Delete /REBOOTOK $INSTDIR\plugins\org.jupeter.yaml_editor_1.0.2.jar
     Delete /REBOOTOK $INSTDIR\plugins\${TOTORI_ECLIPSE_PLUGIN}
     DeleteRegValue HKLM "${REGKEY}\Components" Totori
 SectionEnd
