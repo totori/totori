@@ -14,7 +14,7 @@ RequestExecutionLevel admin
 !define DESCRIPTION "Totori - User Acceptance Testing Workbench"
 !define OUT_FILE Totori.workbench-${VERSION}.exe
 !define INSTALL_DIR $PROGRAMFILES\eclipse
-!define TOTORI_ECLIPSE_PLUGIN org.totori_0.0.4.v201002140147.jar
+!define TOTORI_ECLIPSE_PLUGIN org.totori_0.0.5.v201002142344.jar
 !define RUBY_DIR "C:\Ruby"
 
 # Included files
@@ -157,7 +157,7 @@ SectionGroup Watir SECGRP0002
         SetOutPath $TEMP
         # Installing library ..\totori\workbench\assets\ext\watir\AutoItX3.dll
         !define LIBRARY_IGNORE_VERSION
-        !insertmacro InstallLib REGDLL NOTSHARED NOREBOOT_NOTPROTECTED ..\totori\workbench\assets\ext\watir\AutoItX3.dll $TEMP\AutoItX3.dll $TEMP
+        !insertmacro InstallLib REGDLL NOTSHARED NOREBOOT_NOTPROTECTED thirdparties\AutoItX3.dll $TEMP\AutoItX3.dll $TEMP
         !undef LIBRARY_IGNORE_VERSION
 
         WriteRegStr HKLM "${REGKEY}\Components" AutoItX3 1
